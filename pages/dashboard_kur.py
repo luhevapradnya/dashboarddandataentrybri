@@ -518,4 +518,3 @@ with row_3_col_2:
 
 # --- Tampilkan Data yang Sudah Difilter (opsional) ---
 st.subheader(f"📄 Data Terfilter: {len(filtered_data)} baris")
-st.dataframe(filtered_data, hide_index=True, use_container_width=True)
