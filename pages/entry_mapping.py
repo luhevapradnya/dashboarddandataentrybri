@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import os
-from streamlit_option_menu import option_menu
 # Load or initialize UMKM data
 
 # Fungsi untuk load data dari file CSV
@@ -12,21 +11,21 @@ no_sidebar_style = """
     </style>
 """
 st.markdown(no_sidebar_style, unsafe_allow_html=True)
-
 with st.sidebar:
     st.image("https://upload.wikimedia.org/wikipedia/commons/9/97/Logo_BRI.png", width=200)
-    selected = option_menu(
-        menu_title="Navigasi",
+    selected = st.radio(
+        "Navigasi",
         options=["Beranda", "Data Entry", "Dashboard"],
-        icons=["house", "pencil-square", "bar-chart"],
-        menu_icon="cast",
-        default_index=1
+        index=0,
+        format_func=lambda x: f"📌 {x}" if x == "Beranda" else ("📊 " + x if x == "Dashboard" else "📝 " + x)
     )
 
+# Content based on selected menu
 if selected == "Beranda":
-    st.switch_page("main_app.py")
-elif selected == "Dashboard":
-    st.switch_page("pages/dashboard_kur.py")
+    st.markdown("<h1 style='text-align: center; color: #000000; font-weight: 900;'>Aplikasi Pendataan Kredit UMKM</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #0033EE; font-weight: 700;'>Bank Rakyat Indonesia (BRI)</h3>", unsafe_allow_html=True)
+    st.markdown("---")
+
 
 def load_data():
     if os.path.exists("umkm_data.xlsx"):
